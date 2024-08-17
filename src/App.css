@@ -1,0 +1,377 @@
+/* App.css */
+
+/* Base styles for mobile devices */
+input, select, textarea {
+  font-size: 16px; /* Ensure font size is 16px or larger */
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #2a2f38; /* Telegram's dark background */
+  color: #e0e0e0; /* Light gray text */
+  margin: 0;
+  min-height: 100vh;
+  height: auto;
+  display: block;
+  padding: 60px 20px;
+  font-size: 16px;
+}
+
+.App {
+  background-color: #1c2026; /* Darker background for the app container */
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px; /* Restrict the max width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.signout-button{
+  padding: 10px;
+  position: fixed;
+  top:-15px;
+  right: -15px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  rotate: 45deg;
+  transition: all .6s ease;
+}
+.signout-button:hover{
+  background-color: red;
+  rotate: 0deg;
+  top:10px;
+  right: 10px;
+}
+.generated-buttons{
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.auth-buttons{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.inputs{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.auth-buttons button{
+  background-color: #0088cc; /* Telegram's button color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.generated-groccery-list{
+  padding: 0px;
+  list-style: decimal outside;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.generated-buttons button{
+  background-color: #0088cc; /* Telegram's button color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-modal{
+  background-color: #cc3300 !important;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  background-color: #2a2f38; /* Input field background */
+  color: #e0e0e0; /* Text color */
+  border: 1px solid #3e434b;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 10px; /* Space between input and button */
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.input-field:focus {
+  background-color: #3e434b; /* Change on focus */
+}
+.recipes-section {
+  margin-top: 20px;
+}
+
+.recipes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Existing styles here... */
+
+/* Add these styles for recipe details */
+.recipe-item {
+  margin-bottom: 10px;
+  padding: 6px 0 6px 12px;
+  background-color: rgb(56, 56, 56);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.recipe-link {
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+li:has(.recipe-link.active){
+  background-color: #007ab8;
+}
+
+.recipe-details {
+  background-color: #2a2f38;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.delete-item-button {
+  background-color: rgba(218, 216, 216, 0.92);
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  border: none;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c02b2b;
+  cursor: pointer;
+}
+
+.delete-item-button:active {
+  background-color: rgb(196, 43, 43);
+}
+
+
+
+.submit-button,
+.add-item-button {
+  background-color: #0088cc; /* Telegram's button color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-button:hover,
+.add-item-button:hover {
+  background-color: #007ab8; /* Slightly darker blue on hover */
+}
+
+.grocery-list-container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.section-title {
+  color: #ffffff;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #3e434b;
+  padding-bottom: 5px;
+  font-size: 1.2rem; /* Increase title size slightly */
+}
+
+.grocery-list {
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.grocery-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 6px 50px 6px 6px;
+  background-color: rgb(56, 56, 56); /* Light blue background */
+  justify-content: space-between;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.grocery-item:nth-child(2n) {
+  background-color: gray; /* Light blue background */
+}
+
+.grocery-item label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.grocery-item input[type='checkbox'] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+
+.tabs{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+
+.tab-button{
+  background-color: #868686;
+  padding: 6px;
+  color: #f3f3f3;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+}
+
+.tab-button:nth-child(1){
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.tab-button:nth-child(3){
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.tab-button.active {
+  background-color: #007ab8;
+}
+
+.delete-item-button{
+  background-color: rgba(218, 216, 216, 0.92);
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100%;
+  width: 40px;
+  border: none;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3a3838;
+}
+
+.delete-item-button:active{
+  background-color: rgb(196, 43, 43);
+}
+
+.grocery-item.checked {
+  text-decoration: line-through;
+  color: #868686; /* Gray out checked items */
+}
+
+.grocery-item:nth-child(2n).checked {
+  text-decoration: line-through;
+  color: #cecccc; /* Gray out checked items */
+}
+
+.modal-buttons{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.manual-adding-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.manual-adding-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.add-item-button:disabled{
+  background-color: #868686;
+}
+.clear-list-button{
+  background-color: #cc3300; /* Telegram's button color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 50%;
+  transition: all .3s ease;
+  margin-left: 10px;
+  overflow: hidden;
+}
+
+.submit-button:disabled{
+  background-color: #868686;
+}
+.clear-list-button:disabled{
+  width: 0%;
+  padding: 0px;
+  margin-left: 0px;
+  color: transparent !important;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #0088cc;
+  width: 16px;
+  height: 16px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
