@@ -107,6 +107,11 @@ body {
   flex-direction: column;
 }
 
+.emty-list-message{
+  font-size: 16px;
+  margin-top: 20px;
+}
+
 .input-field {
   background-color: #2a2f38; /* Input field background */
   color: #e0e0e0; /* Text color */
@@ -265,12 +270,13 @@ li:has(.recipe-link.active){
 
 
 .tab-button{
-  background-color: #868686;
+  background-color: #404b5f;
   padding: 6px;
   color: #f3f3f3;
   border: none;
   width: 100%;
   font-size: 16px;
+  transition: all .3s ease;
 }
 
 .tab-button:nth-child(1){
@@ -284,6 +290,7 @@ li:has(.recipe-link.active){
 
 .tab-button.active {
   background-color: #007ab8;
+  transform: scale(1.1);
 }
 
 .delete-item-button{
