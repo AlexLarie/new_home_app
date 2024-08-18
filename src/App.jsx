@@ -362,7 +362,7 @@ const App = () => {
                 <button
                   onClick={handleSendRequest}
                   className="submit-button"
-                  disabled={loading}
+                  disabled={loading || !requestText}
                 >
                   {loading ? <div className="loader"></div> : "Generate recipe"}
                 </button>
