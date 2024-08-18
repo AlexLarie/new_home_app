@@ -7,6 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import dishImage from './dish-dinner.svg';
 
 const App = () => {
   const [groceriesList, setGroceriesList] = useState([]);
@@ -366,13 +367,14 @@ const App = () => {
                   {loading ? <div className="loader"></div> : "Generate recipe"}
                 </button>
               </div>
+              {loading && <div className="loading-image"><img src={dishImage} alt="dish" /></div>}
               {showModal && (
                 <div className="modal">
                   <div className="modal-content">
                     <h2>Generated Recipe</h2>
                     <p>{recipe}</p>
                     <h2>Generated Groceries</h2>
-                    <ul>
+                    <ul className="generated-groccery-list">
                       {generatedGroceries.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
