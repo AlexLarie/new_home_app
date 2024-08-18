@@ -264,13 +264,13 @@ const App = () => {
     <div className="App">
       {authLoading ? (
         <div class="grocery-container">
-          <div class="grocery-item item1">
+          <div class="grocery-item-loading item1">
             <img src={carrotImg} alt="carrot" />
           </div>
-          <div class="grocery-item item2">
+          <div class="grocery-item-loading item2">
             <img src={saladImage} alt="salad" />
           </div>
-          <div class="grocery-item item3">
+          <div class="grocery-item-loading item3">
             <img src={bananImage} alt="banana" />
           </div>
           <div class="cart"></div>
