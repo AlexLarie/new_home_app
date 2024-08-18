@@ -7,7 +7,11 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import dishImage from './dish-dinner.svg';
+import dishImage from "./images/dish-dinner.svg";
+import bananImage from "./images/banana.svg";
+import carrotImg from "./images/carrot.svg";
+import saladImage from "./images/salad.svg";
+import cartImage from "./images/shopping-cart.svg";
 
 const App = () => {
   const [groceriesList, setGroceriesList] = useState([]);
@@ -259,7 +263,18 @@ const App = () => {
   return (
     <div className="App">
       {authLoading ? (
-        <div>Loading...</div>
+        <div class="grocery-container">
+          <div class="grocery-item item1">
+            <img src={carrotImg} alt="carrot" />
+          </div>
+          <div class="grocery-item item2">
+            <img src={saladImage} alt="salad" />
+          </div>
+          <div class="grocery-item item3">
+            <img src={bananImage} alt="banana" />
+          </div>
+          <div class="cart"></div>
+        </div>
       ) : user ? (
         <div>
           <button className="signout-button" onClick={handleSignOut}>
@@ -304,7 +319,11 @@ const App = () => {
                   className="input-field"
                 />
                 <div className="manual-adding-buttons">
-                  <button disabled={!newItem} className="add-item-button" onClick={handleAddItem}>
+                  <button
+                    disabled={!newItem}
+                    className="add-item-button"
+                    onClick={handleAddItem}
+                  >
                     Add Item
                   </button>
                   <button
@@ -317,7 +336,9 @@ const App = () => {
                 </div>
               </div>
               {!groceriesList.length ? (
-                <p className="emty-list-message">There is nothing in the list at the moment</p>
+                <p className="emty-list-message">
+                  There is nothing in the list at the moment...
+                </p>
               ) : (
                 <ul className="grocery-list">
                   {groceriesList.map((item, index) => (
@@ -367,7 +388,11 @@ const App = () => {
                   {loading ? <div className="loader"></div> : "Generate recipe"}
                 </button>
               </div>
-              {loading && <div className="loading-image"><img src={dishImage} alt="dish" /></div>}
+              {loading && (
+                <div className="loading-image">
+                  <img src={dishImage} alt="dish" />
+                </div>
+              )}
               {showModal && (
                 <div className="modal">
                   <div className="modal-content">

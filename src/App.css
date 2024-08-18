@@ -290,6 +290,72 @@ li:has(.recipe-link.active){
   width: 200px;
   animation: rotate 2s linear infinite; /* 2 seconds per rotation */
 }
+.grocery-container {
+  position: relative;
+  width: 300px;
+  height: 250px;
+  margin: 50px auto;
+}
+
+.grocery-item {
+  position: absolute;
+  /* width: 50px;
+  height: 50px; */
+  background-color: transparent !important;
+  border-radius: 50%;
+  animation: fall 3s ease-in-out infinite;
+}
+
+.grocery-item img{
+  width: 60px
+}
+
+.item1 {
+  left: 100px;
+  animation-delay: 0s;
+}
+
+.item2 {
+  left: 110px;
+  animation-delay: 0.5s;
+}
+
+.item3 {
+  left: 100px;
+  animation-delay: 1s;
+}
+
+.cart {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 200px;
+  height: 100px;
+  transform: translateX(-50%);
+  background-image: url(./images/shopping-cart.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cart img{
+  width: 150px;
+}
+
+@keyframes fall {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 200px;
+    opacity: 0;
+  }
+}
+
 
 @keyframes rotate {
   0% {
