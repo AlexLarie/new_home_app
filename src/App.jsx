@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import "./App.css";
 import { database, ref, set, push, onValue, remove, auth } from "../firebase";
 import {
@@ -11,7 +11,7 @@ import dishImage from "./images/dish-dinner.svg";
 import bananImage from "./images/banana.svg";
 import carrotImg from "./images/carrot.svg";
 import saladImage from "./images/salad.svg";
-import cartImage from "./images/shopping-cart.svg";
+const RecipeModal = React.lazy(() => import("./RecipeModal"));
 
 const App = () => {
   const [groceriesList, setGroceriesList] = useState([]);
@@ -393,45 +393,17 @@ const App = () => {
                   <img src={dishImage} alt="dish" />
                 </div>
               )}
-              {showModal && (
-                <div className="modal">
-                  <div className="modal-content">
-                    <h2>Generated Recipe</h2>
-                    <p>{recipe}</p>
-                    <h2>Generated Groceries</h2>
-                    <ul className="generated-groccery-list">
-                      {generatedGroceries.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                    <div className="generated-buttons">
-                      <button onClick={handleAddRecipeToGroceries}>
-                        Add to Groceries
-                      </button>
-                      <button
-                        onClick={() => {
-                          const recipeName = prompt("Enter recipe name:");
-                          if (recipeName) {
-                            handleSaveRecipe(recipeName, {
-                              recipe,
-                              ingredients: generatedGroceries,
-                            });
-                          }
-                          setShowModal(false);
-                        }}
-                      >
-                        Save Recipe
-                      </button>
-                      <button
-                        className="close-modal"
-                        onClick={() => setShowModal(false)}
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <Suspense fallback={<div>Loading...</div>}>
+                {showModal && (
+                  <RecipeModal
+                    recipe={recipe}
+                    handleAddRecipeToGroceries={handleAddRecipeToGroceries}
+                    generatedGroceries={generatedGroceries}
+                    handleSaveRecipe={handleSaveRecipe}
+                    setShowModal={setShowModal}
+                  />
+                )}
+              </Suspense>
             </div>
           )}
 

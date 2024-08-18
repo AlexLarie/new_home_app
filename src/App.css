@@ -306,7 +306,7 @@ li:has(.recipe-link.active){
   animation: fall 3s ease-in-out infinite;
 }
 
-.grocery-item img{
+.grocery-item-loading img{
   width: 60px
 }
 
