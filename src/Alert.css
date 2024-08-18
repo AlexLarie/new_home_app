@@ -1,0 +1,60 @@
+/* Alert.css */
+.alert {
+   padding: 15px;
+   border-radius: 5px;
+   position: fixed; /* Change to absolute positioning for top animation */
+   top: -100px; /* Start off-screen */
+   left: 50%;
+   transform: translateX(-50%);
+   width: 300px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   color: white;
+   opacity: 0; /* Start with hidden */
+   animation: slideIn 0.5s forwards, fadeOut 0.5s 2.5s forwards; /* Apply animations */
+ }
+ 
+ /* Animation for sliding in from the top */
+ @keyframes slideIn {
+   from {
+     top: -100px; /* Start position off-screen */
+     opacity: 0;
+   }
+   to {
+     top: 20px; /* Final position */
+     opacity: 1;
+   }
+ }
+ 
+ /* Animation for fading out */
+ @keyframes fadeOut {
+   from {
+     opacity: 1;
+   }
+   to {
+     opacity: 0;
+   }
+ }
+ 
+ /* Success and error styling */
+ .alert.success {
+   background-color: #4caf50; /* Green for success */
+ }
+ 
+ .alert.error {
+   background-color: #f44336; /* Red for error */
+ }
+ 
+ .alert-message {
+   flex-grow: 1;
+ }
+ 
+ .close-button {
+   background: none;
+   border: none;
+   font-size: 16px;
+   color: white;
+   cursor: pointer;
+ }
+ 

@@ -6,11 +6,13 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendEmailVerification,
 } from "firebase/auth";
 import dishImage from "./images/dish-dinner.svg";
 import bananImage from "./images/banana.svg";
 import carrotImg from "./images/carrot.svg";
 import saladImage from "./images/salad.svg";
+import Alert from "./Alert";
 const RecipeModal = React.lazy(() => import("./RecipeModal"));
 
 const App = () => {
@@ -27,11 +29,11 @@ const App = () => {
   const [showRecipeDetails, setShowRecipeDetails] = useState(null);
   const [recipeDetails, setRecipeDetails] = useState(null); // Separate state for saved recipe details
 
+  const [alertMessage, setAlertMessage] = useState(null);
   const [user, setUser] = useState(null); // Track authenticated user
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(true); // To handle loading state during auth check
-
   useEffect(() => {
     // Listen for auth state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -84,11 +86,36 @@ const App = () => {
     setAuthLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setUser(userCredential.user);
-        setAuthLoading(false);
+        const user = userCredential.user;
+
+        // Send verification email
+        sendEmailVerification(user)
+          .then(() => {
+            setAlertMessage({
+              text: "Verification email sent! Please check your inbox.",
+              type: "success",
+            });
+            // Sign out the user after sending the verification email
+            signOut(auth).then(() => {
+              setUser(null); // Clear the user from the state
+              setAuthLoading(false);
+            });
+          })
+          .catch((error) => {
+            console.error("Error sending verification email:", error);
+            setAlertMessage({
+              text: "Error sending verification email.",
+              type: "error",
+            });
+            setAuthLoading(false);
+          });
       })
       .catch((error) => {
         console.error("Error signing up:", error);
+        setAlertMessage({
+          text: "Error signing up.",
+          type: "error",
+        });
         setAuthLoading(false);
       });
   };
@@ -102,12 +129,24 @@ const App = () => {
       })
       .catch((error) => {
         console.error("Error signing in:", error);
+        setAlertMessage({
+          text: "Error signing in.",
+          type: "error",
+        });
         setAuthLoading(false);
       });
   };
 
   const handleSignOut = () => {
     setAuthLoading(true);
+
+    // Clear state
+    setGroceriesList([]);
+    setRecipesList([]);
+    setSelectedRecipe(null);
+    setShowRecipeDetails(null);
+    setRecipeDetails(null);
+
     signOut(auth)
       .then(() => {
         setUser(null);
@@ -115,8 +154,16 @@ const App = () => {
       })
       .catch((error) => {
         console.error("Error signing out:", error);
+        setAlertMessage({
+          text: "Error signing out.",
+          type: "error",
+        });
         setAuthLoading(false);
       });
+  };
+
+  const handleCloseAlert = () => {
+    setAlertMessage(null); // Close the alert
   };
 
   const handleSendRequest = async () => {
@@ -223,6 +270,10 @@ const App = () => {
       ref(database, `users/${user.uid}/recipesDetails/${newRecipeId}`),
       recipeDetails
     );
+    setAlertMessage({
+      text: "Recipe saved.",
+      type: "success",
+    });
     setGeneratedGroceries([]);
     setRecipe("");
   };
@@ -257,11 +308,22 @@ const App = () => {
       const updatedList = [...groceriesList, ...newItems];
       setGroceriesList(updatedList);
       set(ref(database, `users/${user.uid}/groceriesList`), updatedList);
+      setAlertMessage({
+        text: "Groceries added to the list.",
+        type: "success",
+      });
     }
   };
 
   return (
     <div className="App">
+      {alertMessage && (
+            <Alert
+              message={alertMessage.text}
+              type={alertMessage.type}
+              onClose={handleCloseAlert}
+            />
+          )}
       {authLoading ? (
         <div class="grocery-container">
           <div class="grocery-item-loading item1">
