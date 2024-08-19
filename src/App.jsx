@@ -35,13 +35,26 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(true); // To handle loading state during auth check
   useEffect(() => {
-    // Listen for auth state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      if (user) {
+        if (user.emailVerified) {
+          setUser(user);
+        } else {
+          // Sign out and prompt user to verify email
+          signOut(auth).then(() => {
+            setAlertMessage({
+              text: "Please verify your email address.",
+              type: "error",
+            });
+          });
+        }
+      }
       setAuthLoading(false); // Authentication check is done
     });
+  
     return unsubscribe;
   }, []);
+  
 
   useEffect(() => {
     if (user) {
@@ -124,8 +137,19 @@ const App = () => {
     setAuthLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setUser(userCredential.user);
-        setAuthLoading(false);
+        const user = userCredential.user;
+        if (user.emailVerified) {
+          setUser(user);
+        } else {
+          // Sign out the user and show an alert
+          signOut(auth).then(() => {
+            setAlertMessage({
+              text: "Please verify your email address.",
+              type: "error",
+            });
+            setAuthLoading(false);
+          });
+        }
       })
       .catch((error) => {
         console.error("Error signing in:", error);
@@ -136,6 +160,7 @@ const App = () => {
         setAuthLoading(false);
       });
   };
+  
 
   const handleSignOut = () => {
     setAuthLoading(true);
@@ -325,17 +350,17 @@ const App = () => {
             />
           )}
       {authLoading ? (
-        <div class="grocery-container">
-          <div class="grocery-item-loading item1">
+        <div className="grocery-container">
+          <div className="grocery-item-loading item1">
             <img src={carrotImg} alt="carrot" />
           </div>
-          <div class="grocery-item-loading item2">
+          <div className="grocery-item-loading item2">
             <img src={saladImage} alt="salad" />
           </div>
-          <div class="grocery-item-loading item3">
+          <div className="grocery-item-loading item3">
             <img src={bananImage} alt="banana" />
           </div>
-          <div class="cart"></div>
+          <div className="cart"></div>
         </div>
       ) : user ? (
         <div>
