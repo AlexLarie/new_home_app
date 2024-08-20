@@ -299,11 +299,10 @@ li:has(.recipe-link.active){
 
 .grocery-item-loading {
   position: absolute;
-  /* width: 50px;
-  height: 50px; */
   background-color: transparent !important;
   border-radius: 50%;
   animation: fall 3s ease-in-out infinite;
+  opacity: 0;
 }
 
 .grocery-item-loading img{
